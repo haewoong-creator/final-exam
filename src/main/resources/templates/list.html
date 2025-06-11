@@ -1,0 +1,48 @@
+<!-- src/main/resources/templates/product/list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 목록</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+</head>
+<body>
+    <h1>상품 목록</h1>
+
+    <!-- 검색 폼: GET 방식으로 keyword 파라미터를 URL에 남깁니다 -->
+    <form th:action="@{/product/list}" method="get">
+        <input type="text" name="keyword" th:value="${keyword}" placeholder="검색어 입력…" />
+        <button type="submit">검색</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>타입</th>
+                <th>이름</th>
+                <th>가격</th>
+                <th>등록일</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- products 라는 모델 속성으로 넘어온 리스트를 출력 -->
+            <tr th:each="prod : ${products}">
+                <td th:text="${prod.productSeq}">1</td>
+                <td th:text="${prod.productType}">AI</td>
+                <td>
+                    <!-- 상세 페이지 링크: seq와 현재 keyword 정보 모두 URL에 남김 -->
+                    <a th:href="@{/product/detail/{seq}(seq=${prod.productSeq}, keyword=${keyword})}"
+                       th:text="${prod.productName}">챗GPT</a>
+                </td>
+                <td th:text="${#numbers.formatInteger(prod.productPrice, '#,###')}">30,000</td>
+                <td th:text="${#dates.format(prod.regDt, 'yyyy-MM-dd HH:mm')}">2025-06-11 13:00</td>
+            </tr>
+            <!-- 검색 결과가 없을 때 -->
+            <tr th:if="${#lists.isEmpty(products)}">
+                <td colspan="5">찾으시는 상품이 없습니다.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

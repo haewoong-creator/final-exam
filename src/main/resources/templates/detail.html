@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th=
+"http://www.thymeleaf.org">
+<head>
+<meta charset=
+"UTF-8">
+<title>상품 상세</title>
+<style>
+table { width: 100%; border-collapse:
+collapse; margin-top: 20px; }
+th { background-color: #f2f2f2; text-align:
+center;}
+td { text-align: center;}
+th, td { border: 1px solid #ddd; padding:
+8px;}
+.url-link { text-decoration: none; color:
+blue; display: inline-block; margin-top: 20px;}
+</style>
+</head>
+<body>
+<div>
+<h2>도서 상세</h2>
+<table>
+<tbody>
+<tr>
+<th>번호</th>
+<td
+th:text=
+"${result.PRODUCT_DETAIL.product_seq}"><
+/td>
+</tr>
+<tr>
+<th>상품유형</th>
+<td
+th:text=
+"${result.PRODUCT_DETAIL.product_type}">
+</td>
+</tr>
+<tr>
+<th>상품이름</th>
+<td
+th:text=
+"${result.PRODUCT_DETAIL.product_name}"
+></td>
+</tr>
+<tr>
+<th>상품가격</th>
+<td
+th:text=
+"${result.PRODUCT_DETAIL.product_price}">
+</td>
+</tr>
+<tr>
+<th>등록일시</th>
+<td
+th:text=
+"${result.PRODUCT_DETAIL.reg_dt}"></td>
+</tr>
+<tr>
+<th>수정일시</th>
+<td
+th:text=
+"${result.PRODUCT_DETAIL.mod_dt}"></td>
+</tr>
+</table>
+<a class=
+"url-link"
+th:href=
+"@{'/product/list'}" th:text=
+"목록"></a>
+</div>
+</body>
+</html>
